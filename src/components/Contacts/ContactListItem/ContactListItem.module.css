@@ -1,0 +1,33 @@
+.contactListItem {
+  margin: 20px 0px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.contactListItem h4 {
+  margin: 10px 0px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 22px;
+  font-weight: 300;
+}
+
+.contactListItem button {
+  border-radius: 7px;
+  border: none;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  width: 30px;
+  height: 30px;
+  background-color: lightcoral;
+  padding: 0;
+}
+
+.contactListItem button:hover {
+  cursor: pointer;
+  background-color: red;
+}

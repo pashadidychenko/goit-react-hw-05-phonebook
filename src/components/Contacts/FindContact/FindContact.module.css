@@ -1,0 +1,16 @@
+.findContainet {
+  margin: 15px 0px;
+  width: 100%;
+  padding: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+.findContainet label {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: gray;
+}
+.findContainet input {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 18px;
+  width: 440px;
+  height: 25px;
+}

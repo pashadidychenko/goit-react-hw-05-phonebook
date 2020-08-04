@@ -1,0 +1,36 @@
+.contactForm {
+  display: block;
+  margin: 15px 0px;
+  width: 100%;
+  padding: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.contactForm label {
+  display: block;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.contactForm input {
+  display: block;
+  width: 440px;
+  height: 25px;
+}
+
+.contactForm button {
+  border-radius: 5px;
+  border: none;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-size: 18px;
+  width: 100%;
+  height: 40px;
+  color: white;
+  background-color: blue;
+}
+.contactForm button:hover {
+  cursor: pointer;
+  color: black;
+  background-color: lightskyblue;
+}
