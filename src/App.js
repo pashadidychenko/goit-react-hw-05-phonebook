@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import MainTitle from "./components/Title/MainTitle/MainTitle";
 import ContactList from "./components/Contacts/ContactList/ContactList";
 import { AddContact } from "./components/Contacts/AddContact/AddContact";
@@ -7,16 +8,24 @@ import {
   sendStoregData,
   getStoregData,
 } from "./components/Services/LocalStoreg";
+import { CSSTransition } from "react-transition-group";
+import popTransition from "./components/Contacts/transitions/pop.module.css";
+import slideTitleTransition from "./components/Contacts/transitions/slideTitle.module.css";
+import alertTransition from "./components/Contacts/transitions/alert.module.css";
 import styles from "./styles.module.css";
+import Alert from "./components/Alet/Alert";
 
 class App extends React.Component {
   state = {
     contacts: [],
     filter: "",
+    inOn: false,
+    exist: false,
   };
 
   componentDidMount() {
     this.setState({ contacts: getStoregData() });
+    this.setState({ inOn: true });
   }
 
   componentDidUpdate() {
@@ -24,12 +33,16 @@ class App extends React.Component {
   }
 
   addContacts = (contact) => {
+    contact.name = contact.name.replace(/\b\w/g, (l) => l.toUpperCase());
     if (
       this.state.contacts.find(
-        (el) => el.name.toLowerCase() === contact.name.toLowerCase()
+        (element) => element.name.toLowerCase() === contact.name.toLowerCase()
       )
     ) {
-      alert("Контакт з таким іменем вже існує");
+      this.setState({ exist: true });
+      return setTimeout(() => {
+        this.setState({ exist: false });
+      }, 2000);
     } else {
       this.setState((prevState) => ({
         contacts: prevState.contacts.concat([contact]),
@@ -38,8 +51,8 @@ class App extends React.Component {
   };
 
   filterContact = (e) => {
-    let ele = e.target.value;
-    this.setState({ filter: ele });
+    let element = e.target.value;
+    this.setState({ filter: element });
   };
 
   filteredContact = () => {
@@ -59,17 +72,40 @@ class App extends React.Component {
   };
 
   render() {
+    const { contacts, inOn, exist } = this.state;
     return (
       <div className={styles.maineContainer}>
         <div className={styles.subContainer}>
-          <MainTitle />
+          <CSSTransition
+            in={inOn}
+            timeout={500}
+            classNames={slideTitleTransition}
+            unmountOnExit
+          >
+            <MainTitle />
+          </CSSTransition>
           <AddContact onFormSubmit={this.addContacts} />
-          <FindContact filterContact={this.filterContact} />
+          <CSSTransition
+            in={contacts.length > 1}
+            timeout={250}
+            classNames={popTransition}
+            unmountOnExit
+          >
+            <FindContact filterContact={this.filterContact} />
+          </CSSTransition>
           <ContactList
             contactList={this.filteredContact()}
             deleteContact={this.deleteContact}
           />
         </div>
+        <CSSTransition
+          in={exist}
+          timeout={250}
+          classNames={alertTransition}
+          unmountOnExit
+        >
+          <Alert />
+        </CSSTransition>
       </div>
     );
   }
@@ -77,4 +113,9 @@ class App extends React.Component {
 
 export default App;
 
-App.propTypes = {};
+App.propTypes = {
+  contacts: PropTypes.array,
+  filter: PropTypes.string,
+  inOn: PropTypes.bool,
+  exist: PropTypes.bool,
+};

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { v4 as uuidv4 } from "uuid";
 import styles from "./AddContact.module.css";
 
@@ -29,6 +30,7 @@ export class AddContact extends React.Component {
   };
 
   render() {
+    const { name, number } = this.state;
     return (
       <form className={styles.contactForm}>
         <label htmlFor="contactName">Ім'я</label>
@@ -36,7 +38,7 @@ export class AddContact extends React.Component {
           id="contactName"
           type="text"
           data-type="name"
-          value={this.state.name}
+          value={name}
           placeholder="Введіть Ваше Ім'я"
           onChange={this.handleInputValue}
         />
@@ -46,7 +48,7 @@ export class AddContact extends React.Component {
           id="contactNumber"
           type="text"
           data-type="number"
-          value={this.state.number}
+          value={number}
           placeholder="Введіть Ваш номер"
           onChange={this.handleInputValue}
         />
@@ -58,3 +60,8 @@ export class AddContact extends React.Component {
     );
   }
 }
+
+AddContact.propTypes = {
+  name: PropTypes.string,
+  number: PropTypes.string,
+};

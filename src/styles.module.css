@@ -1,4 +1,5 @@
 .maineContainer {
+  position: relative;
   margin: 50px 100px;
   width: 550px;
   background: white;
